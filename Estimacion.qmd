@@ -23,7 +23,6 @@ format:
     link-external-newwindow: true
     citations-hover: true
     footnotes-hover: true
-    css: styles.css
     theme: "cosmo" # Opción de tema alternativo más profesional
     highlight-style: "monokai" # Resaltado de código con contraste
     code-overflow: "scroll" # Controla desbordamiento de código en pantallas pequeñas
@@ -80,7 +79,7 @@ if(!require(DescTools)) {
 library(DescTools)
 ```
 
-# . Intervalos de confianza
+# . Intervalos de Confianza
 
 Para distribuciones simétricas los intervalos de confianza siguen la forma:
 
@@ -100,7 +99,7 @@ donde:
 
 $$\hat{\theta _{i}}=\text{límite inferior },\hat{\theta _{s}}=\text{límite superior}$$
 
-## . Media varianza conocida
+## . Media Varianza Conocida
 
 $$\bar{x}\pm z_{\alpha /2}\frac{\sigma }{\sqrt{n}}$$
 
