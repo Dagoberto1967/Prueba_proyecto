@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dagoberto Salgado Horta">
+
+<title>ESTADÍSTICA INFERENCIAL</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Estimacion_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Estimacion_files/libs/quarto-html/quarto.js"></script>
+<script src="Estimacion_files/libs/quarto-html/popper.min.js"></script>
+<script src="Estimacion_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Estimacion_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Estimacion_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Estimacion_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Estimacion_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Estimacion_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Estimacion_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<style>html{ scroll-behavior: smooth; }</style>
+<style>
+
+      .quarto-title-block .quarto-title-banner {
+        background: #d4a3ab;
+      }
+</style>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-right">
+      <h1 class="title">ESTADÍSTICA INFERENCIAL</h1>
+            <p class="subtitle lead">Estimación de parámetros</p>
+                      </div>
+  </div>
+    
+  <div class="quarto-title-meta-author column-page-right">
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-heading">Afiliación</div>
+    
+      <div class="quarto-title-meta-contents">
+      <p class="author">Dagoberto Salgado Horta </p>
+    </div>
+    <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              <a href="https://www.ut.edu.co/">
+              Universidad del Tolima
+              </a>
+            </p>
+        </div>
+    </div>
+
+  <div class="quarto-title-meta column-page-right">
+
+        
+      <div>
+      <div class="quarto-title-meta-heading">Fecha de publicación</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">30 de julio de 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-full toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#instalar-y-activar-paquetes" id="toc-instalar-y-activar-paquetes" class="nav-link active" data-scroll-target="#instalar-y-activar-paquetes"><span class="header-section-number">1</span> . Instalar y Activar paquetes</a></li>
+  <li><a href="#intervalos-de-confianza" id="toc-intervalos-de-confianza" class="nav-link" data-scroll-target="#intervalos-de-confianza"><span class="header-section-number">2</span> . Intervalos de confianza</a>
+  <ul class="collapse">
+  <li><a href="#media-varianza-conocida" id="toc-media-varianza-conocida" class="nav-link" data-scroll-target="#media-varianza-conocida"><span class="header-section-number">2.1</span> . Media varianza conocida</a></li>
+  <li><a href="#media-varianza-desconocida" id="toc-media-varianza-desconocida" class="nav-link" data-scroll-target="#media-varianza-desconocida"><span class="header-section-number">2.2</span> . Media varianza desconocida</a></li>
+  <li><a href="#proporción-poblacional" id="toc-proporción-poblacional" class="nav-link" data-scroll-target="#proporción-poblacional"><span class="header-section-number">2.3</span> . Proporción poblacional</a></li>
+  <li><a href="#varianza-poblacional" id="toc-varianza-poblacional" class="nav-link" data-scroll-target="#varianza-poblacional"><span class="header-section-number">2.4</span> . Varianza poblacional</a></li>
+  <li><a href="#diferencia-de-medias-pareadas" id="toc-diferencia-de-medias-pareadas" class="nav-link" data-scroll-target="#diferencia-de-medias-pareadas"><span class="header-section-number">2.5</span> . Diferencia de medias pareadas</a></li>
+  <li><a href="#diferencia-de-medias-independientes" id="toc-diferencia-de-medias-independientes" class="nav-link" data-scroll-target="#diferencia-de-medias-independientes"><span class="header-section-number">2.6</span> . Diferencia de medias independientes</a></li>
+  <li><a href="#diferencia-de-dos-proporciones-poblacionales" id="toc-diferencia-de-dos-proporciones-poblacionales" class="nav-link" data-scroll-target="#diferencia-de-dos-proporciones-poblacionales"><span class="header-section-number">2.7</span> . Diferencia de dos proporciones poblacionales</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+</div>
+<main class="content quarto-banner-title-block column-page-right" id="quarto-document-content">
+
+
+
+
+
+<style type="text/css">
+ .tab{ text-indent: 30px; }
+ body{ font-size: 120%; }
+body {text-align: justify}
+/*Color de la tabla de contenido*/
+ .tocify-header{
+   color: #d60226;
+
+ }
+ /*Color de los enlaces*/
+ a{
+   color: #d60226;
+ }
+ /*Color de los pies de página*/
+ .footnote-text{
+   color: #d60226;
+ }
+
+</style>
+<section id="instalar-y-activar-paquetes" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> . Instalar y Activar paquetes</h1>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(kableExtra)) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"kableExtra"</span>)}</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(tidyverse)) {</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)}</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(OneTwoSamples)) {</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"OneTwoSamples"</span>)}</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(OneTwoSamples)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(DescTools)) {</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"DescTools"</span>)}</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DescTools)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="intervalos-de-confianza" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> . Intervalos de confianza</h1>
+<p>Para distribuciones simétricas los intervalos de confianza siguen la forma:</p>
+<p><span class="math display">\hat{\Theta }\pm MoE</span> donde:</p>
+<p><span class="math display">\hat{\theta } = \text{estadístico o estimador}</span></p>
+<p><span class="math display">MoE = \text{margen de error} = SE \cdot \text{stat}_{\text{crit}, 1-\alpha, \nu}</span></p>
+<p><span class="math display">SE = \text{error estándar}, 1-\alpha = \text{nivel de confianza}, \nu = \text{grados de libertad}</span></p>
+<p>Para distribuciones asimétricas los intervalos de confianza siguen la forma:</p>
+<p><span class="math display">\hat{\theta _{i}}&lt;\hat{\theta }&lt;\hat{\theta _{s}}</span></p>
+<p>donde:</p>
+<p><span class="math display">\hat{\theta _{i}}=\text{límite inferior },\hat{\theta _{s}}=\text{límite superior}</span></p>
+<section id="media-varianza-conocida" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="media-varianza-conocida"><span class="header-section-number">2.1</span> . Media varianza conocida</h2>
+<p><span class="math display">\bar{x}\pm z_{\alpha /2}\frac{\sigma }{\sqrt{n}}</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-2376346689.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>Intervalo de confianza al 95% para la media poblacional con varianza conocida</strong></p>
+<p>Un fabricante asegura que la varianza del peso de ciertos dispositivos electrónicos es conocida y constante, siendo de 25 gramos cuadrados. Se toma una muestra de 50 dispositivos y se encuentra que el peso promedio de la muestra es de 75 gramos. Con base en esta información, se requiere calcular un intervalo de confianza al 95% para la media poblacional del peso de los dispositivos electrónicos.</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span>                <span class="co"># Tamaño de la muestra</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>media_muestral <span class="ot">&lt;-</span> <span class="dv">75</span>   <span class="co"># Media muestral</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>varianza_poblacional <span class="ot">&lt;-</span> <span class="dv">25</span>  <span class="co"># Varianza poblacional conocida</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>nivel_confianza <span class="ot">&lt;-</span> <span class="fl">0.95</span>     <span class="co"># Nivel de confianza (95%)</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular el error estándar</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>error_estandar <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(varianza_poblacional <span class="sc">/</span> n)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular el valor crítico Z para el nivel de confianza</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>z_critico <span class="ot">&lt;-</span> <span class="fu">qnorm</span>((<span class="dv">1</span> <span class="sc">+</span> nivel_confianza) <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular los límites del intervalo de confianza</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>limite_inferior <span class="ot">&lt;-</span> media_muestral <span class="sc">-</span> z_critico <span class="sc">*</span> error_estandar</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>limite_superior <span class="ot">&lt;-</span> media_muestral <span class="sc">+</span> z_critico <span class="sc">*</span> error_estandar</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar resultados</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Intervalo de confianza para la media poblacional:["</span>, limite_inferior, <span class="st">","</span>, limite_superior, <span class="st">"]</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Intervalo de confianza para la media poblacional:[ 73.6141 , 76.3859 ]</code></pre>
+</div>
+</div>
+<p><strong>Interpretación:</strong> Con una confianza del 95%, se puede estimar que el verdadero peso promedio de los dispositivos electrónicos, se encuentra entre: 73.6141 y 76.3859 gramos. Y habrá una probabilidad del 5% de encontrar valores para dicha verdadera media por fuera del anterior intervalo.</p>
+</section>
+<section id="media-varianza-desconocida" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="media-varianza-desconocida"><span class="header-section-number">2.2</span> . Media varianza desconocida</h2>
+<p><strong>Intervalo de confianza para la media poblacional varianza desconocida</strong></p>
+<p><span class="math display">\bar{x}\pm t_{(\alpha /2,n-1)}\frac{s}{\sqrt{n}}</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-3471773736.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>Un investigador desea estimar la media poblacional del peso de ciertos dispositivos electrónicos basándose en una muestra de 10 dispositivos. Los pesos en gramos de estos dispositivos son: 72, 75, 78, 80, 68, 74, 77, 76, 73, y 79. El investigador no conoce la varianza poblacional y, por lo tanto, debe estimarla a partir de la muestra. Se requiere calcular un intervalo de confianza al 95% para la media poblacional del peso.</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>datos_muestra <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">72</span>, <span class="dv">75</span>, <span class="dv">78</span>, <span class="dv">80</span>, <span class="dv">68</span>, <span class="dv">74</span>, <span class="dv">77</span>, <span class="dv">76</span>, <span class="dv">73</span>, <span class="dv">79</span>)  <span class="co"># Datos muestrales</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>nivel_confianza <span class="ot">&lt;-</span> <span class="fl">0.95</span>  <span class="co"># Nivel de confianza (95%)</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular estadísticas muestrales</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(datos_muestra)             <span class="co"># Tamaño de la muestra</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>media_muestral <span class="ot">&lt;-</span> <span class="fu">mean</span>(datos_muestra)  <span class="co"># Media muestral</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>desviacion_muestral <span class="ot">&lt;-</span> <span class="fu">sd</span>(datos_muestra)  <span class="co"># Desviación estándar muestral</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular el error estándar</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>error_estandar <span class="ot">&lt;-</span> desviacion_muestral <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Grados de libertad</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>grados_libertad <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular el valor crítico t para el nivel de confianza</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>t_critico <span class="ot">&lt;-</span> <span class="fu">qt</span>((<span class="dv">1</span> <span class="sc">+</span> nivel_confianza) <span class="sc">/</span> <span class="dv">2</span>, <span class="at">df =</span> grados_libertad)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular los límites del intervalo de confianza</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>limite_inferior <span class="ot">&lt;-</span> media_muestral <span class="sc">-</span> t_critico <span class="sc">*</span> error_estandar</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>limite_superior <span class="ot">&lt;-</span> media_muestral <span class="sc">+</span> t_critico <span class="sc">*</span> error_estandar</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar resultados</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Intervalo de confianza para la media poblacional:["</span>, limite_inferior, <span class="st">","</span>, limite_superior, <span class="st">"]</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Intervalo de confianza para la media poblacional:[ 72.61414 , 77.78586 ]</code></pre>
+</div>
+</div>
+<p><strong>Interpretación:</strong> Con una confianza del 95%, se puede estimar que el verdadero peso promedio de los dispositivos electrónicos, se encuentra entre: 72.61414 y 77.78586 gramos. Y habrá una probabilidad del 5% de encontrar valores para dicha verdadera media por fuera del anterior intervalo.</p>
+</section>
+<section id="proporción-poblacional" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="proporción-poblacional"><span class="header-section-number">2.3</span> . Proporción poblacional</h2>
+<p><strong>Intervalo de confianza para la proporción poblacional</strong></p>
+<p><span class="math display"> \hat{p}\mp z_{\alpha /2}\sqrt{\hat{p}(1-\hat{p})/n}</span></p>
+<p><img src="images/clipboard-2939727559.png" class="img-fluid"></p>
+<p>En una empresa, se realizó una encuesta entre 200 personas para saber cuántas prefieren un producto específico A. De las 200 personas encuestadas, 150 personas afirmaron que preferían el producto A sobre otros productos. Calcula el intervalo de confianza al 99% para la proporción de personas en la población que prefieren el producto A.</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>intervalo_confianza_proporcion <span class="ot">&lt;-</span> <span class="cf">function</span>(x, n, <span class="at">conf =</span> <span class="fl">0.99</span>) {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># x: número de éxitos (éxitos observados en la muestra)</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># n: tamaño de la muestra</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># conf: nivel de confianza (por defecto 99%)</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Proporción muestral</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  p_hat <span class="ot">&lt;-</span> x <span class="sc">/</span> n</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Valor z para el nivel de confianza deseado (en este caso, 99%)</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">-</span> conf) <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Error estándar de la proporción</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  error <span class="ot">&lt;-</span> z <span class="sc">*</span> <span class="fu">sqrt</span>((p_hat <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> p_hat)) <span class="sc">/</span> n)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Limites inferior y superior del intervalo de confianza</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  IC_inf <span class="ot">&lt;-</span> p_hat <span class="sc">-</span> error</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  IC_sup <span class="ot">&lt;-</span> p_hat <span class="sc">+</span> error</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Retornar el intervalo de confianza</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">c</span>(IC_inf, IC_sup))</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Ejemplo de uso</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Número de éxitos (x), tamaño de la muestra (n) y nivel de confianza</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">150</span>   <span class="co"># Número de éxitos</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">200</span>  <span class="co"># Tamaño de la muestra</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>confianza <span class="ot">&lt;-</span> <span class="fl">0.99</span>  <span class="co"># Nivel de confianza deseado</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular el intervalo de confianza</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>ic <span class="ot">&lt;-</span> <span class="fu">intervalo_confianza_proporcion</span>(x, n, confianza)</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar el resultado</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Intervalo de confianza para la proporción poblacional: ["</span>, <span class="fu">round</span>(ic[<span class="dv">1</span>], <span class="dv">3</span>), <span class="st">","</span>, <span class="fu">round</span>(ic[<span class="dv">2</span>], <span class="dv">3</span>), <span class="st">"]</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Intervalo de confianza para la proporción poblacional: [ 0.671 , 0.829 ]</code></pre>
+</div>
+</div>
+<p><strong>Interpretación:</strong> Con una confianza del 99%, se puede estimar que el verdadera proporción de personas que prefieren el producto A, se encuentra entre el 67.1% y el 82.9%. Y habrá una probabilidad del 1% de encontrar valores para dicha verdadera proporción por fuera del anterior intervalo.</p>
+</section>
+<section id="varianza-poblacional" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="varianza-poblacional"><span class="header-section-number">2.4</span> . Varianza poblacional</h2>
+<p><strong>Intervalo de confianza para la varianza poblacional</strong></p>
+<p><span class="math display">L_{i} = \frac{(n-1)s^{2}}{\chi^{2}_{(\alpha /2, n-1)}}</span></p>
+<p><span class="math display">L_{s} = \frac{(n-1)s^{2}}{\chi^{2}_{(1-\alpha /2, n-1)}}</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-2337792184.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>Imagina que eres un analista de calidad en una fábrica de bolígrafos. Se te ha pedido que determine si la variabilidad del peso de los bolígrafos producidos en la planta cumple con los estándares de calidad establecidos por la empresa. Para ello, tomas una muestra aleatoria de 30 bolígrafos y pesas cada uno. Sabemos que el peso de los bolígrafos sigue una distribución normal, pero la variación es desconocida. El objetivo es calcular un intervalo de confianza del 95% para la varianza poblacional del peso de los bolígrafos.</p>
+<p>Datos muestrales: 5.12, 5.08, 5.10, 5.15, 5.11, 5.13, 5.14, 5.07, 5.16, 5.09, 5.13, 5.10, 5.08, 5.0, 5.14, 5.11, 5.10, 5.0, 5.0, 5.08, 5.15,5.14, 5.1, 5.0, 5.0, 5.0, 5.12, 5.14, 5.0, 5.12</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Datos muestrales: pesos de los 30 bolígrafos</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>muestra <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">5.12</span>, <span class="fl">5.08</span>, <span class="fl">5.10</span>, <span class="fl">5.15</span>, <span class="fl">5.11</span>, <span class="fl">5.13</span>, <span class="fl">5.14</span>, <span class="fl">5.07</span>, <span class="fl">5.16</span>, <span class="fl">5.09</span>, <span class="fl">5.13</span>, <span class="fl">5.10</span>, <span class="fl">5.08</span>, <span class="fl">5.09</span>, <span class="fl">5.14</span>, <span class="fl">5.11</span>, <span class="fl">5.10</span>, <span class="fl">5.12</span>, <span class="fl">5.13</span>, <span class="fl">5.08</span>, <span class="fl">5.15</span>, <span class="fl">5.14</span>, <span class="fl">5.10</span>, <span class="fl">5.09</span>, <span class="fl">5.13</span>, <span class="fl">5.11</span>, <span class="fl">5.12</span>, <span class="fl">5.14</span>, <span class="fl">5.10</span>, <span class="fl">5.12</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Tamaño de la muestra</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(muestra)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular la varianza muestral</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>var_muestral <span class="ot">&lt;-</span> <span class="fu">var</span>(muestra)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Nivel de confianza del 95%</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>chi2_izq <span class="ot">&lt;-</span> <span class="fu">qchisq</span>(<span class="dv">1</span> <span class="sc">-</span> alpha <span class="sc">/</span> <span class="dv">2</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)  <span class="co"># Cuantil superior</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>chi2_der <span class="ot">&lt;-</span> <span class="fu">qchisq</span>(alpha <span class="sc">/</span> <span class="dv">2</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)      <span class="co"># Cuantil inferior</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular el intervalo de confianza para la varianza</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>lim_inf <span class="ot">&lt;-</span> (n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> var_muestral <span class="sc">/</span> chi2_izq</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>lim_sup <span class="ot">&lt;-</span> (n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> var_muestral <span class="sc">/</span> chi2_der</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar los resultados</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"La varianza muestral es:"</span>, var_muestral, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>La varianza muestral es: 0.0005771264 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Intervalo de confianza para la varianza poblacional del 95%: ["</span>, lim_inf, <span class="st">", "</span>, lim_sup, <span class="st">"]</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Intervalo de confianza para la varianza poblacional del 95%: [ 0.0003660505 ,  0.001042973 ]</code></pre>
+</div>
+</div>
+<p><strong>Interpretación:</strong> Con una confianza del 95%, se puede estimar que la verdadera varianza de los bolígrafos, se encuentra entre 0.0003660505 y 0.001042973 gramos. Y habrá una probabilidad del 5% de encontrar valores para dicha verdadera varianza por fuera del anterior intervalo.</p>
+</section>
+<section id="diferencia-de-medias-pareadas" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="diferencia-de-medias-pareadas"><span class="header-section-number">2.5</span> . Diferencia de medias pareadas</h2>
+<p><strong>Intervalo de confianza para la diferencia de medias poblacionales muestras pareadas</strong></p>
+<p><span class="math display">\bar{X}_{d_{i}}\mp t_{(\alpha /2,n-1)}S_{d_{i}}/\sqrt{n}</span> <span class="math display">\bar{X}_{d_{i}}=\frac{\sum d_{i}}{n}</span></p>
+<p><span class="math display">S^{2}_{d_{i}}=\frac{\sum (d_{i}-\bar{d_{i}})^{2}}{n-1}</span></p>
+<p><span class="math display">S_{d_{i}}=\sqrt{S^{2}_{d_{i}}}</span></p>
+<p><span class="math display">d_{i}=X_{antes}-X_{despues}</span></p>
+<p><strong>Para concluir</strong>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-2005144058.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>Un investigador desea evaluar el efecto de un tratamiento en la presión arterial de un grupo de 10 pacientes. Se toma la medida de la presión arterial de cada paciente antes y después del tratamiento. El investigador quiere construir un intervalo de confianza del 95% para la diferencia de medias (antes - después) de las presiones arteriales en este grupo.</p>
+<p>Los datos de las presiones arteriales antes y después del tratamiento son los siguientes:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-2653411543.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Datos de presión arterial antes y después del tratamiento</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>antes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">140</span>, <span class="dv">145</span>, <span class="dv">150</span>, <span class="dv">160</span>, <span class="dv">155</span>, <span class="dv">162</span>, <span class="dv">148</span>, <span class="dv">153</span>, <span class="dv">158</span>, <span class="dv">170</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>despues <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">132</span>, <span class="dv">138</span>, <span class="dv">142</span>, <span class="dv">155</span>, <span class="dv">148</span>, <span class="dv">154</span>, <span class="dv">140</span>, <span class="dv">146</span>, <span class="dv">150</span>, <span class="dv">160</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular las diferencias</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>diferencias <span class="ot">&lt;-</span> antes <span class="sc">-</span> despues</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Media y desviación estándar de las diferencias</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>media_diferencias <span class="ot">&lt;-</span> <span class="fu">mean</span>(diferencias)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>sd_diferencias <span class="ot">&lt;-</span> <span class="fu">sd</span>(diferencias)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Número de pacientes</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(diferencias)</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Grados de libertad</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Valor crítico t para un intervalo de confianza del 95%</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>t_critico <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, df)</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Error estándar de la media de las diferencias</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>error_estandar <span class="ot">&lt;-</span> sd_diferencias <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Intervalo de confianza</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>limite_inferior <span class="ot">&lt;-</span> media_diferencias <span class="sc">-</span> t_critico <span class="sc">*</span> error_estandar</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>limite_superior <span class="ot">&lt;-</span> media_diferencias <span class="sc">+</span> t_critico <span class="sc">*</span> error_estandar</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar resultados</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Media de las diferencias:"</span>, media_diferencias, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Media de las diferencias: 7.6 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Desviación estándar de las diferencias:"</span>, sd_diferencias, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Desviación estándar de las diferencias: 1.264911 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Intervalo de confianza del 95% para la diferencia de medias: ["</span>, limite_inferior, <span class="st">","</span>, limite_superior, <span class="st">"]</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Intervalo de confianza del 95% para la diferencia de medias: [ 6.695137 , 8.504863 ]</code></pre>
+</div>
+</div>
+<p><strong>Verificación del supuesto de normalidad:</strong></p>
+<p>Antes de realizar este análisis, sería recomendable verificar el supuesto de normalidad de las diferencias. Una forma común de hacerlo es mediante una prueba de normalidad como la prueba de Shapiro-Wilk:</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prueba de normalidad de las diferencias</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(diferencias)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  diferencias
+W = 0.86764, p-value = 0.09382</code></pre>
+</div>
+</div>
+<p>Si el p-valor es mayor que 0.05, se puede asumir que las diferencias siguen una distribución normal.</p>
+<p><strong>Interpretación:</strong> Con una confianza del 95%, se puede estimar que la verdadera diferencia entre los promedios de la presión arterial antes y después de recibir el tratamiento, se encuentra aproximadamente entre 6.50 y 8.50 mmHg. Y habrá una probabilidad del 5% de encontrar valores para dicha diferencia verdadera de medias por fuera del anterior intervalo.</p>
+<p><strong>Como:</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-685700978.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>Conclusión:</strong></p>
+<p>El intervalo de confianza no incluye el valor cero, lo que sugiere que hay una diferencia estadísticamente significativa entre la presión arterial antes y después del tratamiento, en favor de una reducción en la presión arterial.</p>
+<p>Esto implica que el tratamiento tiene un efecto positivo en la reducción de la presión arterial de los pacientes estudiados, y la evidencia sugiere que este efecto es consistente en el rango estimado.</p>
+<p><strong>Consideraciones adicionales:</strong></p>
+<p>Es importante recordar que el análisis se basa en el supuesto de normalidad de las diferencias entre las mediciones. En caso de que este supuesto no se cumpla (por ejemplo, si la prueba de Shapiro-Wilk indica que las diferencias no siguen una distribución normal), se podrían utilizar métodos no paramétricos como la prueba de Wilcoxon para la diferencia de medias en muestras pareadas.</p>
+<p>Además, aunque el tratamiento parece efectivo según este análisis, este resultado solo es aplicable a la muestra estudiada. Se necesitaría un análisis más amplio para generalizar los resultados a una población más amplia.</p>
+<p>En resumen, el tratamiento muestra un efecto positivo en la reducción de la presión arterial, pero siempre es recomendable hacer más pruebas para validar estos hallazgos.</p>
+</section>
+<section id="diferencia-de-medias-independientes" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="diferencia-de-medias-independientes"><span class="header-section-number">2.6</span> . Diferencia de medias independientes</h2>
+<p><strong>Caso a) Diferencia de las medias de dos poblaciones varianzas poblacionales conocidas</strong></p>
+<p><span class="math display">(\bar{X}_{1} - \bar{X}_{2}) \mp Z_{\alpha /2} \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}
+</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-1412882607.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>Se desea estimar la diferencia entre las medias de dos poblaciones independientes. Se tienen dos grupos, uno con 50 estudiantes que tomaron un curso de matemáticas en línea y otro con 60 estudiantes que tomaron un curso presencial. Las puntuaciones promedio de los exámenes finales de cada grupo y sus varianzas son las siguientes:</p>
+<ul>
+<li>Para el grupo en línea:</li>
+</ul>
+<p><span class="math display"> \bar{X_{1}}=75</span></p>
+<p><span class="math display">\sigma _{1} ^{2} = 100</span></p>
+<ul>
+<li>Para el grupo presencial:</li>
+</ul>
+<p><span class="math display"> \bar{X_{2}}=70</span></p>
+<p><span class="math display">\sigma _{2} ^{2} = 80</span></p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Datos del ejercicio</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>x1_bar <span class="ot">&lt;-</span> <span class="dv">75</span>      <span class="co"># Media del primer grupo (en línea)</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>x2_bar <span class="ot">&lt;-</span> <span class="dv">70</span>      <span class="co"># Media del segundo grupo (presencial)</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>sigma1_sq <span class="ot">&lt;-</span> <span class="dv">100</span>  <span class="co"># Varianza del primer grupo</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>sigma2_sq <span class="ot">&lt;-</span> <span class="dv">80</span>   <span class="co"># Varianza del segundo grupo</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="dv">50</span>          <span class="co"># Tamaño de la muestra del primer grupo</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="dv">60</span>          <span class="co"># Tamaño de la muestra del segundo grupo</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>z_alpha2 <span class="ot">&lt;-</span> <span class="fl">1.96</span>  <span class="co"># Valor crítico Z para un intervalo de confianza del 95%</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Cálculo de la diferencia de medias</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>diff_means <span class="ot">&lt;-</span> x1_bar <span class="sc">-</span> x2_bar</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Cálculo del error estándar de la diferencia de medias</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>se_diff <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(sigma1_sq <span class="sc">/</span> n1 <span class="sc">+</span> sigma2_sq <span class="sc">/</span> n2)</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Cálculo del intervalo de confianza</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>margin_of_error <span class="ot">&lt;-</span> z_alpha2 <span class="sc">*</span> se_diff</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>lower_bound <span class="ot">&lt;-</span> diff_means <span class="sc">-</span> margin_of_error</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>upper_bound <span class="ot">&lt;-</span> diff_means <span class="sc">+</span> margin_of_error</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Resultados</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"La diferencia de medias es:"</span>, diff_means, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>La diferencia de medias es: 5 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"El error estándar es:"</span>, se_diff, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>El error estándar es: 1.825742 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"El margen de error es:"</span>, margin_of_error, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>El margen de error es: 3.578454 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"El intervalo de confianza del 95% es: ["</span>, lower_bound, <span class="st">","</span>, upper_bound, <span class="st">"]</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>El intervalo de confianza del 95% es: [ 1.421546 , 8.578454 ]</code></pre>
+</div>
+</div>
+<p><strong>Interpretación:</strong> Con una confianza del 95%, se puede estimar que la verdadera diferencia entre los promedios de las puntuaciones de los estudiantes en linea y los estudiantes en presencialidad, se encuentra aproximadamente entre 1.42 y 8.58 puntos. Y habrá una probabilidad del 5% de encontrar valores para dicha diferencia verdadera de medias por fuera del anterior intervalo.</p>
+<p><strong>Como:</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-685700978.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>Conclusión:</strong></p>
+<p>Dado que el intervalo de confianza no incluye el valor 0, podemos inferir que hay una diferencia significativa entre las medias de los dos grupos (en línea y presencial), al menos con un 95% de confianza. La diferencia está entre 1.42 y 8.58 puntos, lo que sugiere que el curso en línea tiene una puntuación final superior al curso presencial en el examen final.</p>
+<p><strong>Reflexión adicional:</strong></p>
+<p>Aunque el intervalo nos muestra que la diferencia de medias es significativa (no incluye 0), sería importante también considerar otros factores, como el tamaño del efecto (la magnitud de la diferencia) y si esta diferencia tiene relevancia práctica o educativa más allá de la estadística. Además, si el intervalo fuera más estrecho, podría indicar una mayor precisión en la estimación.</p>
+<p>En resumen, este intervalo de confianza nos da una estimación razonablemente precisa de la diferencia entre las medias de los dos grupos, y nos permite afirmar con 95% de confianza que los estudiantes del curso en línea obtuvieron, en promedio, entre 1.42 y 8.58 puntos más que los estudiantes del curso presencial.</p>
+<p>Para que los resultados del intervalo de confianza para la diferencia de medias con varianzas conocidas sean válidos, deben cumplirse varios supuestos fundamentales. A continuación te detallo los más importantes:</p>
+<ol type="1">
+<li>Independencia de las muestras:</li>
+</ol>
+<p>Las dos muestras deben ser independientes. Es decir, los valores de una muestra no deben influir en los valores de la otra muestra. Esto implica que los estudiantes en el curso en línea no deben estar relacionados con los estudiantes del curso presencial (por ejemplo, no deben ser los mismos estudiantes en ambos cursos ni deben compartir características comunes que afecten los resultados).</p>
+<ol start="2" type="1">
+<li>Distribuciones normales (o n grandes):</li>
+</ol>
+<p>Las poblaciones de donde provienen las muestras deben seguir distribuciones normales. Si las muestras son pequeñas (generalmente menos de 30), este supuesto se vuelve más crítico. Sin embargo, si las muestras son grandes, por el teorema central del límite, no es estrictamente necesario que las poblaciones sean normales, ya que la distribución de la diferencia de medias tenderá a ser normal, incluso si las poblaciones originales no lo son.</p>
+<p>Si el tamaño de las muestras es pequeño, es recomendable comprobar que las distribuciones de ambas poblaciones son aproximadamente normales, o bien, que no existe evidencia de fuertes sesgos o distribuciones muy asimétricas.</p>
+<ol start="3" type="1">
+<li>Varianzas conocidas:</li>
+</ol>
+<p>Este supuesto es clave para este tipo de intervalo de confianza. Las varianzas poblacionales de las dos poblaciones deben ser conocidas y no deben cambiar entre muestras.</p>
+<p>En la práctica, es raro conocer las varianzas poblacionales exactas, por lo que este supuesto a menudo se aborda mediante el uso de estimaciones de las varianzas muestrales cuando las varianzas son desconocidas. En estos casos, se usaría una distribución t de Student en lugar de una distribución normal estándar.</p>
+<ol start="4" type="1">
+<li>Muestras aleatorias:</li>
+</ol>
+<p>Las muestras deben ser aleatorias y representativas de las poblaciones de interés. Esto asegura que no haya sesgo en la selección de los participantes en cada grupo (por ejemplo, estudiantes del curso en línea y del curso presencial deben ser seleccionados al azar de sus respectivas poblaciones).</p>
+<ol start="5" type="1">
+<li>Tamaños de muestra suficientemente grandes (si es necesario):</li>
+</ol>
+<p>Aunque no es un supuesto estricto, es importante que las muestras sean suficientemente grandes para que el error estándar sea representativo de la población. Si las muestras son pequeñas, la validez del intervalo puede verse afectada, y se puede requerir el uso de una distribución t, especialmente si las varianzas no son conocidas.</p>
+<p><strong>Caso b) Diferencia de las medias de dos poblaciones varianzas poblacionales desconocidas e iguales</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-2320603567.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>Caso c) Diferencia de las medias de dos poblaciones varianzas poblacionales desconocidas y distintas</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-2678882518.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>Para determinar si las varianzas poblacionales desconocidas son iguales o distintas, se debe calcular el siguiente intervalo para el cociente de dos varianzas poblacionales:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-2966094004.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>Si el anterior intervalo contiene al número 1, las varianzas poblacionales desconocidas seran iguales, en caso contrario distintas</strong></p>
+<p>Un investigador quiere estudiar si hay una diferencia significativa en las puntuaciones finales de un curso de matemáticas entre dos grupos de estudiantes: uno que tomaron el curso en línea y otro que lo tomaron de manera presencial. Para ello, toma una muestra de estudiantes de ambos grupos y obtiene los siguientes datos:</p>
+<p>Grupo 1: Estudiantes que tomaron el curso en línea: Puntuaciones finales de 10 estudiantes: 72, 75, 79, 81, 74, 85, 78, 69, 83, 77</p>
+<p>Grupo 2: Estudiantes que tomaron el curso presencial: Puntuaciones finales de 12 estudiantes: 68, 70, 72, 74, 65, 73, 80, 79, 67, 66, 71, 75</p>
+<p>Calcular un intervalo de confianza del 95% para la diferencia entre las medias de los dos grupos. Se asume que las muestras provienen de distribuciones normales.</p>
+<p><strong>Primero se debe determinar si las varianzas poblaciones desconocidas son iguales o distintas</strong></p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Datos del ejercicio</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>grupo1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">72</span>, <span class="dv">75</span>, <span class="dv">79</span>, <span class="dv">81</span>, <span class="dv">74</span>, <span class="dv">85</span>, <span class="dv">78</span>, <span class="dv">69</span>, <span class="dv">83</span>, <span class="dv">77</span>)  <span class="co"># Puntuaciones grupo 1</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>grupo2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">68</span>, <span class="dv">70</span>, <span class="dv">72</span>, <span class="dv">74</span>, <span class="dv">65</span>, <span class="dv">73</span>, <span class="dv">80</span>, <span class="dv">79</span>, <span class="dv">67</span>, <span class="dv">66</span>, <span class="dv">71</span>, <span class="dv">75</span>)  <span class="co"># Puntuaciones grupo 2</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular desviaciones estándar y tamaños de muestra</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>s1 <span class="ot">&lt;-</span> <span class="fu">sd</span>(grupo1)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>s2 <span class="ot">&lt;-</span> <span class="fu">sd</span>(grupo2)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="fu">length</span>(grupo1)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="fu">length</span>(grupo2)</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular el cociente de varianzas</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>var_ratio <span class="ot">&lt;-</span> (s1<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> (s2<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Grados de libertad</span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> n1 <span class="sc">-</span> <span class="dv">1</span>  <span class="co"># Grados de libertad para grupo 1</span></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> n2 <span class="sc">-</span> <span class="dv">1</span>  <span class="co"># Grados de libertad para grupo 2</span></span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Nivel de confianza (ejemplo: 95%)</span></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtener los valores críticos de F</span></span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>F_lower <span class="ot">&lt;-</span> <span class="fu">qf</span>(alpha <span class="sc">/</span> <span class="dv">2</span>, df1, df2)  <span class="co"># Valor crítico inferior</span></span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>F_upper <span class="ot">&lt;-</span> <span class="fu">qf</span>(<span class="dv">1</span> <span class="sc">-</span> alpha <span class="sc">/</span> <span class="dv">2</span>, df2, df1)  <span class="co"># Valor crítico superior</span></span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular el intervalo de confianza para el cociente de varianzas</span></span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>CI_lower <span class="ot">&lt;-</span> var_ratio <span class="sc">/</span> F_upper</span>
+<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>CI_upper <span class="ot">&lt;-</span> var_ratio <span class="sc">/</span> F_lower</span>
+<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Imprimir resultados</span></span>
+<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Cociente de varianzas:"</span>, var_ratio, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cociente de varianzas: 1.057619 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Intervalo de confianza para el cociente de varianzas:"</span>, CI_lower, <span class="st">"a"</span>, CI_upper, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Intervalo de confianza para el cociente de varianzas: 0.2703474 a 4.137484 </code></pre>
+</div>
+</div>
+<p>Como el anterior intervalo contiene al número 1, se puede concluir que las varianzas poblacionales desconocidas son iguales (Caso b)</p>
+<p><strong>Intervalo para la diferencia de medias</strong></p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Datos del ejercicio</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>grupo1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">72</span>, <span class="dv">75</span>, <span class="dv">79</span>, <span class="dv">81</span>, <span class="dv">74</span>, <span class="dv">85</span>, <span class="dv">78</span>, <span class="dv">69</span>, <span class="dv">83</span>, <span class="dv">77</span>)  <span class="co"># Puntuaciones grupo 1</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>grupo2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">68</span>, <span class="dv">70</span>, <span class="dv">72</span>, <span class="dv">74</span>, <span class="dv">65</span>, <span class="dv">73</span>, <span class="dv">80</span>, <span class="dv">79</span>, <span class="dv">67</span>, <span class="dv">66</span>, <span class="dv">71</span>, <span class="dv">75</span>)  <span class="co"># Puntuaciones grupo 2</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular medias y desviaciones estándar</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>mean1 <span class="ot">&lt;-</span> <span class="fu">mean</span>(grupo1)</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>mean2 <span class="ot">&lt;-</span> <span class="fu">mean</span>(grupo2)</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>s1 <span class="ot">&lt;-</span> <span class="fu">sd</span>(grupo1)</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>s2 <span class="ot">&lt;-</span> <span class="fu">sd</span>(grupo2)</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Tamaños de las muestras</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="fu">length</span>(grupo1)</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="fu">length</span>(grupo2)</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimación combinada de la varianza (sp^2)</span></span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>sp2 <span class="ot">&lt;-</span> (((n1 <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> s1<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> ((n2 <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> s2<span class="sc">^</span><span class="dv">2</span>)) <span class="sc">/</span> (n1 <span class="sc">+</span> n2 <span class="sc">-</span> <span class="dv">2</span>)</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Cálculo del error estándar combinado</span></span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>SE <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(sp2 <span class="sc">*</span> (<span class="dv">1</span><span class="sc">/</span>n1 <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>n2))</span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Diferencia de medias</span></span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>diff_means <span class="ot">&lt;-</span> mean1 <span class="sc">-</span> mean2</span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Grados de libertad</span></span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> n1 <span class="sc">+</span> n2 <span class="sc">-</span> <span class="dv">2</span></span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Valor crítico t</span></span>
+<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a>t_critical <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.025</span>, df)</span>
+<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Cálculo del margen de error</span></span>
+<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a>margin_of_error <span class="ot">&lt;-</span> t_critical <span class="sc">*</span> SE</span>
+<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Intervalo de confianza</span></span>
+<span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a>lower_bound <span class="ot">&lt;-</span> diff_means <span class="sc">-</span> margin_of_error</span>
+<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a>upper_bound <span class="ot">&lt;-</span> diff_means <span class="sc">+</span> margin_of_error</span>
+<span id="cb32-36"><a href="#cb32-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-37"><a href="#cb32-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Resultados</span></span>
+<span id="cb32-38"><a href="#cb32-38" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"La diferencia de medias es:"</span>, diff_means, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>La diferencia de medias es: 5.633333 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"El error estándar combinado es:"</span>, SE, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>El error estándar combinado es: 2.094921 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"El valor crítico t es:"</span>, t_critical, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>El valor crítico t es: 2.085963 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"El intervalo de confianza del 95% es: ["</span>, lower_bound, <span class="st">","</span>, upper_bound, <span class="st">"]</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>El intervalo de confianza del 95% es: [ 1.263404 , 10.00326 ]</code></pre>
+</div>
+</div>
+<p><strong>Conclusión:</strong></p>
+<p><strong>Como:</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-685700978.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>Dado que el intervalo de confianza no incluye el valor 0, podemos inferir que hay una diferencia significativa entre las medias de los dos grupos (en línea y presencial), al menos con un 95% de confianza. La diferencia está entre 1.26 y 10 puntos, lo que sugiere que el curso en línea tiene una puntuación final superior al curso presencial en el examen final.</p>
+<p><strong>Resumiendo los supuestos:</strong></p>
+<p>*Normalidad de los datos en cada grupo (especialmente importante con muestras pequeñas).</p>
+<p>*Independencia de las muestras (los grupos no deben estar relacionados entre sí).</p>
+<p>*Igualdad de varianzas entre las dos poblaciones.</p>
+<p>*Muestras aleatorias.</p>
+<p>Si todos estos supuestos se cumplen, el cálculo del intervalo de confianza para la diferencia de medias es válido y los resultados serán confiables.</p>
+</section>
+<section id="diferencia-de-dos-proporciones-poblacionales" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="diferencia-de-dos-proporciones-poblacionales"><span class="header-section-number">2.7</span> . Diferencia de dos proporciones poblacionales</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-2757468955.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>En una investigación de mercado, se desea comparar la proporción de clientes satisfechos con un producto en dos tiendas diferentes. Se obtiene una muestra aleatoria de 300 clientes de la Tienda A y 250 clientes de la Tienda B. Los resultados de las encuestas son los siguientes:</p>
+<p>Tienda A: 180 clientes están satisfechos con el producto. Tienda B: 150 clientes están satisfechos con el producto.</p>
+<p>Construya un intervalo de confianza del 95% para la diferencia de las proporciones poblacionales de clientes satisfechos entre la Tienda A y la Tienda B.</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Datos proporcionados</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>x_A <span class="ot">&lt;-</span> <span class="dv">180</span>  <span class="co"># Número de clientes satisfechos en la Tienda A</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>n_A <span class="ot">&lt;-</span> <span class="dv">300</span>  <span class="co"># Tamaño de la muestra de la Tienda A</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>x_B <span class="ot">&lt;-</span> <span class="dv">150</span>  <span class="co"># Número de clientes satisfechos en la Tienda B</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>n_B <span class="ot">&lt;-</span> <span class="dv">250</span>  <span class="co"># Tamaño de la muestra de la Tienda B</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Paso 1: Calcular las proporciones muestrales</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>p_A <span class="ot">&lt;-</span> x_A <span class="sc">/</span> n_A</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>p_B <span class="ot">&lt;-</span> x_B <span class="sc">/</span> n_B</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Paso 2: Calcular la diferencia de las proporciones muestrales</span></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>diff_p <span class="ot">&lt;-</span> p_A <span class="sc">-</span> p_B</span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Paso 3: Calcular el error estándar de la diferencia de proporciones</span></span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>SE <span class="ot">&lt;-</span> <span class="fu">sqrt</span>((p_A <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> p_A) <span class="sc">/</span> n_A) <span class="sc">+</span> (p_B <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> p_B) <span class="sc">/</span> n_B))</span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Paso 4: Determinar el valor crítico z para un intervalo de confianza del 95%</span></span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a>z_critical <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>)  <span class="co"># 0.975 corresponde a un intervalo de confianza del 95%</span></span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Paso 5: Calcular el intervalo de confianza</span></span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a>margin_error <span class="ot">&lt;-</span> z_critical <span class="sc">*</span> SE</span>
+<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a>lower_bound <span class="ot">&lt;-</span> diff_p <span class="sc">-</span> margin_error</span>
+<span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a>upper_bound <span class="ot">&lt;-</span> diff_p <span class="sc">+</span> margin_error</span>
+<span id="cb40-25"><a href="#cb40-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-26"><a href="#cb40-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Resultado final</span></span>
+<span id="cb40-27"><a href="#cb40-27" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"La diferencia de las proporciones muestrales es:"</span>, diff_p, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>La diferencia de las proporciones muestrales es: 0 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"El intervalo de confianza del 95% para la diferencia de proporciones es: ["</span>, lower_bound, <span class="st">", "</span>, upper_bound, <span class="st">"]</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>El intervalo de confianza del 95% para la diferencia de proporciones es: [ -0.0822251 ,  0.0822251 ]</code></pre>
+</div>
+</div>
+<p><strong>Conclusión:</strong></p>
+<p>Con un intervalo de confianza del 95%, podemos decir que no hay evidencia suficiente para concluir que la diferencia en la satisfacción de los clientes entre las Tiendas A y B es estadísticamente significativa. El intervalo que incluye cero sugiere que la verdadera diferencia de proporciones podría ser cero, lo que significa que, aunque la muestra mostró una diferencia, no podemos afirmar con certeza que esta diferencia exista en la población.</p>
+<p>Es posible que otros factores, como el tamaño de las muestras o la variabilidad de los datos, estén afectando los resultados. Para hacer una afirmación más sólida, podrías necesitar más datos o realizar pruebas adicionales.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+<script src="Estimacion_files/libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
