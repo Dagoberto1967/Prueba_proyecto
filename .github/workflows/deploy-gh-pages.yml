@@ -10,32 +10,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+    - name: Checkout source branch
+      uses: actions/checkout@v4
       with:
-        fetch-depth: 0
+        fetch-depth: 0  # fetch full history if needed
 
-    - name: Set up Git
-      run: |
-        git config --global user.name 'GitHub Actions'
-        git config --global user.email 'actions@github.com'
-        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+    # Build your site here if you need to
+    # For example, if you use Jekyll, Hugo, or other static site generator.
+    # Example:
+    # - name: Build site
+    #   run: |
+    #     npm install
+    #     npm run build
 
-    - name: Delete gh-pages branch from remote
-      run: |
-        git push origin --delete gh-pages || true
-
-    - name: Create new gh-pages branch
-      run: |
-        git checkout --orphan gh-pages
-
-    - name: Add all files to gh-pages
-      run: |
-        git add --all
-        git commit -m "Deploy to gh-pages"
-
-    - name: Push to gh-pages branch
-      run: |
-        git push origin gh-pages --force
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: .   # change this to your build output folder if you build (e.g., ./public, ./dist, etc.)
+        force_orphan: true  # recreate gh-pages from scratch (similar to what you did before)
