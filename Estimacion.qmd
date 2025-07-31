@@ -59,7 +59,7 @@ body {text-align: justify}
 </style>
 ```
 
-# . Instalar y Activar paquetes
+# . Instalar y Activar Paquetes
 
 ```{r}
 if(!require(kableExtra)) {
